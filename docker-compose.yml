@@ -10,10 +10,10 @@ services:
             - ./database/initdb.d:/docker-entrypoint-initdb.d
         restart: always
         environment:
-            - MYSQL_ROOT_PASSWORD: qwertyuiop
-            - MYSQL_DATABASE: wordpress 
-            - MYSQL_USER: root 
-            - MYSQL_PASSWORD: 
+            MYSQL_ROOT_PASSWORD: 'qwertyuiop'
+            MYSQL_DATABASE: 'wordpress' 
+            MYSQL_USER: 'root' 
+            MYSQL_PASSWORD: ''
     
     wp_site:
         depends_on: 
