@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    
+    wp_db:
+        image: mysql:8.0.22
+        container_name: wp_db
+        volumes:
+            - ./database/data:/var/lib/mysql
+            - ./database/initdb.d:/docker-entrypoint-initdb.d
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD: qwertyuiop
+            - MYSQL_DATABASE: wordpress 
+            - MYSQL_USER: root 
+            - MYSQL_PASSWORD: 
+    
+    wp_site:
+        depends_on: 
+            - wp_db
+        image: wordpress:5.5.3-php7.2-fpm-alpine
+        container_name: wp_site
+        restart: always
+        ports: 
+            - 1234:80
+        links:
+          - wp_db:mysql
+        volumes:
+          - ./src:/var/www/html
+
